@@ -7,8 +7,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 exports.__esModule = true;
 exports.ContactComponent = void 0;
-var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
 var feedback_1 = require("../shared/feedback");
+var core_1 = require("@angular/core");
 var ContactComponent = /** @class */ (function () {
     function ContactComponent(fb) {
         this.fb = fb;
@@ -19,10 +20,10 @@ var ContactComponent = /** @class */ (function () {
     };
     ContactComponent.prototype.createForm = function () {
         this.feedbackForm = this.fb.group({
-            firstname: '',
-            lastname: '',
-            telnum: 0,
-            email: '',
+            firstname: ['', forms_1.Validators.required],
+            lastname: ['', forms_1.Validators.required],
+            telnum: [0, forms_1.Validators.required],
+            email: ['', forms_1.Validators.required],
             agree: false,
             contacttype: 'None',
             message: ''
@@ -31,8 +32,20 @@ var ContactComponent = /** @class */ (function () {
     ContactComponent.prototype.onSubmit = function () {
         this.feedback = this.feedbackForm.value;
         console.log(this.feedback);
-        this.feedbackForm.reset();
+        this.feedbackForm.reset({
+            firstname: '',
+            lastname: '',
+            telnum: '',
+            email: '',
+            agree: false,
+            contacttype: 'None',
+            message: ''
+        });
+        this.feedbackFormDirective.resetForm();
     };
+    __decorate([
+        core_1.ViewChild('fform')
+    ], ContactComponent.prototype, "feedbackFormDirective");
     ContactComponent = __decorate([
         core_1.Component({
             selector: 'app-contact',
