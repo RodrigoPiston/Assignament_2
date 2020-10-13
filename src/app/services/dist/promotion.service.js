@@ -13,13 +13,22 @@ var PromotionService = /** @class */ (function () {
     function PromotionService() {
     }
     PromotionService.prototype.getPromotions = function () {
-        return Promise.resolve(promotions_1.PROMOTIONS);
+        return new Promise(function (resolve) {
+            setTimeout(function () { return resolve(promotions_1.PROMOTIONS); }, 2000);
+        });
+        //return Promise.resolve(PROMOTIONS);
     };
     PromotionService.prototype.getPromotion = function (id) {
-        return Promise.resolve(promotions_1.PROMOTIONS.filter(function (promo) { return (promo.id === id); })[0]);
+        return new Promise(function (resolve) {
+            setTimeout(function () { return resolve(promotions_1.PROMOTIONS.filter(function (promo) { return (promo.id === id); })[0]); }, 2000);
+        });
+        //return Promise.resolve(PROMOTIONS.filter((promo) => (promo.id === id))[0]);
     };
     PromotionService.prototype.getFeaturedPromotion = function () {
-        return Promise.resolve(promotions_1.PROMOTIONS.filter(function (promotion) { return promotion.featured; })[0]);
+        return new Promise(function (resolve) {
+            setTimeout(function () { return resolve(promotions_1.PROMOTIONS.filter(function (promotion) { return promotion.featured; })[0]); }, 2000);
+        });
+        //return Promise.resolve(PROMOTIONS.filter((promotion) => promotion.featured)[0]);
     };
     PromotionService = __decorate([
         core_1.Injectable({

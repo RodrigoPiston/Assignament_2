@@ -12,14 +12,26 @@ var dishes_1 = require("../shared/dishes");
 var DishService = /** @class */ (function () {
     function DishService() {
     }
+    // -- Simulate time delay
     DishService.prototype.getDishes = function () {
-        return Promise.resolve(dishes_1.DISHES);
+        return new Promise(function (resolve) {
+            // Simulate server latenci with 2 second delay
+            setTimeout(function () { return resolve(dishes_1.DISHES); }, 2000);
+        });
+        //return Promise.resolve(DISHES);
     };
     DishService.prototype.getDish = function (id) {
-        return Promise.resolve(dishes_1.DISHES.filter(function (dish) { return (dish.id === id); })[0]);
+        return new Promise(function (resolve) {
+            // Simulate server latency with 2 second delay
+            setTimeout(function () { return resolve(dishes_1.DISHES.filter(function (dish) { return (dish.id === id); })[0]); }, 2000);
+        });
+        //return Promise.resolve(DISHES.filter((dish) => (dish.id === id))[0]);
     };
     DishService.prototype.getFeaturedDish = function () {
-        return Promise.resolve(dishes_1.DISHES.filter(function (dish) { return dish.featured; })[0]);
+        return new Promise(function (resolve) {
+            setTimeout(function () { return resolve(dishes_1.DISHES.filter(function (dish) { return dish.featured; })[0]); }, 2000);
+        });
+        //return Promise.resolve(DISHES.filter((dish) => dish.featured)[0]);
     };
     DishService = __decorate([
         core_1.Injectable({

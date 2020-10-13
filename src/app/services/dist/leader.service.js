@@ -13,13 +13,22 @@ var LeaderService = /** @class */ (function () {
     function LeaderService() {
     }
     LeaderService.prototype.getLeaders = function () {
-        return Promise.resolve(leaders_1.LEADERS);
+        //return Promise.resolve(LEADERS);
+        return new Promise(function (resolve) {
+            setTimeout(function () { return resolve(leaders_1.LEADERS); }, 2000);
+        });
     };
     LeaderService.prototype.getLeader = function (id) {
-        return Promise.resolve(leaders_1.LEADERS.filter(function (leader) { return (leader.id === id); })[0]);
+        return new Promise(function (resolve) {
+            setTimeout(function () { return resolve(leaders_1.LEADERS.filter(function (leader) { return (leader.id === id); })[0]); }, 2000);
+        });
+        //return Promise.resolve(LEADERS.filter((leader) => (leader.id === id))[0]);
     };
     LeaderService.prototype.getFeaturedLeader = function () {
-        return Promise.resolve(leaders_1.LEADERS.filter(function (leader) { return leader.featured; })[0]);
+        return new Promise(function (resolve) {
+            setTimeout(function () { return resolve(leaders_1.LEADERS.filter(function (leader) { return leader.featured; })[0]); }, 2000);
+        });
+        //return Promise.resolve(LEADERS.filter((leader) => leader.featured)[0]);
     };
     LeaderService = __decorate([
         core_1.Injectable({
