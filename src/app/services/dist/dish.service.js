@@ -24,6 +24,9 @@ var DishService = /** @class */ (function () {
     DishService.prototype.getFeaturedDish = function () {
         return rxjs_1.of(dishes_1.DISHES.filter(function (dish) { return dish.featured; })[0]).pipe(operators_1.delay(2000));
     };
+    DishService.prototype.getDishIds = function () {
+        return rxjs_1.of(dishes_1.DISHES.map(function (dish) { return dish.id; }));
+    };
     DishService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

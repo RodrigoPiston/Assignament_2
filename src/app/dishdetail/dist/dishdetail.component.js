@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.DishdetailComponent = void 0;
 var core_1 = require("@angular/core");
+var operators_1 = require("rxjs/operators");
 var DishdetailComponent = /** @class */ (function () {
     function DishdetailComponent(dishservice, route, location) {
         this.dishservice = dishservice;
@@ -16,8 +17,15 @@ var DishdetailComponent = /** @class */ (function () {
     }
     DishdetailComponent.prototype.ngOnInit = function () {
         var _this = this;
-        var id = this.route.snapshot.params['id'];
-        this.dishservice.getDish(id).subscribe(function (dish) { return _this.dish = dish; });
+        this.dishservice.getDishIds()
+            .subscribe(function (dishIds) { return _this.dishIds = dishIds; });
+        this.route.params.pipe(operators_1.switchMap(function (params) { return _this.dishservice.getDish(params['id']); }))
+            .subscribe(function (dish) { _this.dish = dish; _this.setPrevNext(dish.id); });
+    };
+    DishdetailComponent.prototype.setPrevNext = function (dishId) {
+        var index = this.dishIds.indexOf(dishId);
+        this.prev = this.dishIds[(this.dishIds.length + index - 1) % this.dishIds.length];
+        this.next = this.dishIds[(this.dishIds.length + index + 1) % this.dishIds.length];
     };
     DishdetailComponent.prototype.goBack = function () {
         this.location.back();
