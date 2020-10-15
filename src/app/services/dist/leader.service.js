@@ -9,26 +9,20 @@ exports.__esModule = true;
 exports.LeaderService = void 0;
 var core_1 = require("@angular/core");
 var leaders_1 = require("../shared/leaders");
+var rxjs_1 = require("rxjs");
+var operators_1 = require("rxjs/operators");
 var LeaderService = /** @class */ (function () {
     function LeaderService() {
     }
     LeaderService.prototype.getLeaders = function () {
         //return Promise.resolve(LEADERS);
-        return new Promise(function (resolve) {
-            setTimeout(function () { return resolve(leaders_1.LEADERS); }, 2000);
-        });
+        return rxjs_1.of(leaders_1.LEADERS).pipe(operators_1.delay(2000));
     };
     LeaderService.prototype.getLeader = function (id) {
-        return new Promise(function (resolve) {
-            setTimeout(function () { return resolve(leaders_1.LEADERS.filter(function (leader) { return (leader.id === id); })[0]); }, 2000);
-        });
-        //return Promise.resolve(LEADERS.filter((leader) => (leader.id === id))[0]);
+        return rxjs_1.of(leaders_1.LEADERS.filter(function (leader) { return (leader.id === id); })[0]).pipe(operators_1.delay(2000));
     };
     LeaderService.prototype.getFeaturedLeader = function () {
-        return new Promise(function (resolve) {
-            setTimeout(function () { return resolve(leaders_1.LEADERS.filter(function (leader) { return leader.featured; })[0]); }, 2000);
-        });
-        //return Promise.resolve(LEADERS.filter((leader) => leader.featured)[0]);
+        return rxjs_1.of(leaders_1.LEADERS.filter(function (leader) { return leader.featured; })[0]).pipe(operators_1.delay(2000));
     };
     LeaderService = __decorate([
         core_1.Injectable({

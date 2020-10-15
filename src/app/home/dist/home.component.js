@@ -16,10 +16,10 @@ var HomeComponent = /** @class */ (function () {
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.dishService.getFeaturedDish().then(function (featuredDish) { return _this.dish = featuredDish; });
-        this.leaderService.getFeaturedLeader().then(function (featuredLeader) { return _this.leader = featuredLeader; });
+        this.dishService.getFeaturedDish().subscribe(function (featuredDish) { return _this.dish = featuredDish; });
+        this.leaderService.getFeaturedLeader().subscribe(function (featuredLeader) { return _this.leader = featuredLeader; });
         ;
-        this.promotionService.getFeaturedPromotion().then(function (featuredPromotion) { return _this.promotion = featuredPromotion; });
+        this.promotionService.getFeaturedPromotion().subscribe(function (featuredPromotion) { return _this.promotion = featuredPromotion; });
     };
     HomeComponent = __decorate([
         core_1.Component({

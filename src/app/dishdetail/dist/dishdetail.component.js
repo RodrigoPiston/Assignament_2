@@ -17,7 +17,7 @@ var DishdetailComponent = /** @class */ (function () {
     DishdetailComponent.prototype.ngOnInit = function () {
         var _this = this;
         var id = this.route.snapshot.params['id'];
-        this.dishservice.getDish(id).then(function (dish) { return _this.dish = dish; });
+        this.dishservice.getDish(id).subscribe(function (dish) { return _this.dish = dish; });
     };
     DishdetailComponent.prototype.goBack = function () {
         this.location.back();

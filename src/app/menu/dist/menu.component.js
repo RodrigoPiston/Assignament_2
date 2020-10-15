@@ -14,7 +14,7 @@ var MenuComponent = /** @class */ (function () {
     }
     MenuComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.dishService.getDishes().then(function (dishes) { return _this.dishes = dishes; });
+        this.dishService.getDishes().subscribe(function (dishes) { return _this.dishes = dishes; });
     };
     MenuComponent.prototype.onSelect = function (dish) {
         this.selectedDish = dish;

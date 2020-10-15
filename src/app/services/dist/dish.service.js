@@ -9,29 +9,20 @@ exports.__esModule = true;
 exports.DishService = void 0;
 var core_1 = require("@angular/core");
 var dishes_1 = require("../shared/dishes");
+var rxjs_1 = require("rxjs");
+var operators_1 = require("rxjs/operators");
 var DishService = /** @class */ (function () {
     function DishService() {
     }
     // -- Simulate time delay
     DishService.prototype.getDishes = function () {
-        return new Promise(function (resolve) {
-            // Simulate server latenci with 2 second delay
-            setTimeout(function () { return resolve(dishes_1.DISHES); }, 2000);
-        });
-        //return Promise.resolve(DISHES);
+        return rxjs_1.of(dishes_1.DISHES).pipe(operators_1.delay(2000));
     };
     DishService.prototype.getDish = function (id) {
-        return new Promise(function (resolve) {
-            // Simulate server latency with 2 second delay
-            setTimeout(function () { return resolve(dishes_1.DISHES.filter(function (dish) { return (dish.id === id); })[0]); }, 2000);
-        });
-        //return Promise.resolve(DISHES.filter((dish) => (dish.id === id))[0]);
+        return rxjs_1.of(dishes_1.DISHES.filter(function (dish) { return (dish.id === id); })[0]).pipe(operators_1.delay(2000));
     };
     DishService.prototype.getFeaturedDish = function () {
-        return new Promise(function (resolve) {
-            setTimeout(function () { return resolve(dishes_1.DISHES.filter(function (dish) { return dish.featured; })[0]); }, 2000);
-        });
-        //return Promise.resolve(DISHES.filter((dish) => dish.featured)[0]);
+        return rxjs_1.of(dishes_1.DISHES.filter(function (dish) { return dish.featured; })[0]).pipe(operators_1.delay(2000));
     };
     DishService = __decorate([
         core_1.Injectable({

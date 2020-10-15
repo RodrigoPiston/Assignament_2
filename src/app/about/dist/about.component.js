@@ -14,7 +14,7 @@ var AboutComponent = /** @class */ (function () {
     }
     AboutComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.leaderService.getLeaders().then(function (leaders) { return _this.leaders = leaders; });
+        this.leaderService.getLeaders().subscribe(function (leaders) { return _this.leaders = leaders; });
     };
     AboutComponent = __decorate([
         core_1.Component({

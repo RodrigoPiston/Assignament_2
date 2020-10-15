@@ -20,10 +20,6 @@
       </mat-card-actions>
     </mat-card>
   </div>
-   <!-- If dishes is visible this div hidden-->
-   <div fxFlex [hidden]="dish">
-    <mat-spinner></mat-spinner><h4>Loading dish . . . Please Wait</h4>
-  </div>
 
   <div fxFlex="40">
     <mat-list *ngIf="dish">
@@ -36,7 +32,7 @@
     </mat-list>
   </div>
   <!-- If dishes is visible this div hidden-->
-  <div fxFlex [hidden]="dish">
-    <mat-spinner></mat-spinner><h4>Loading comments . . . Please Wait</h4>
+  <div  [hidden]="dish" fxFlex>
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
   </div>
 </div>
