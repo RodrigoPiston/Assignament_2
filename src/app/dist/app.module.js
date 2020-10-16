@@ -27,6 +27,7 @@ var forms_2 = require("@angular/forms");
 var select_1 = require("@angular/material/select");
 var slide_toggle_1 = require("@angular/material/slide-toggle");
 var progress_spinner_1 = require("@angular/material/progress-spinner");
+var slider_1 = require("@angular/material/slider");
 // -- Services
 var dish_service_1 = require("./services/dish.service");
 var promotion_service_1 = require("./services/promotion.service");
@@ -79,7 +80,8 @@ var AppModule = /** @class */ (function () {
                 forms_2.ReactiveFormsModule,
                 select_1.MatSelectModule,
                 slide_toggle_1.MatSlideToggleModule,
-                progress_spinner_1.MatProgressSpinnerModule
+                progress_spinner_1.MatProgressSpinnerModule,
+                slider_1.MatSliderModule
             ],
             // -- For show the modals dialog
             entryComponents: [
