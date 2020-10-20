@@ -8,24 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.DishService = void 0;
 var core_1 = require("@angular/core");
-var dishes_1 = require("../shared/dishes");
-var rxjs_1 = require("rxjs");
+var baseurl_1 = require("./../shared/baseurl");
 var operators_1 = require("rxjs/operators");
 var DishService = /** @class */ (function () {
-    function DishService() {
+    function DishService(http) {
+        this.http = http;
     }
     // -- Simulate time delay
     DishService.prototype.getDishes = function () {
-        return rxjs_1.of(dishes_1.DISHES).pipe(operators_1.delay(2000));
+        console.log(baseurl_1.baseURL + 'dishes');
+        return this.http.get(baseurl_1.baseURL + 'dishes');
     };
     DishService.prototype.getDish = function (id) {
-        return rxjs_1.of(dishes_1.DISHES.filter(function (dish) { return (dish.id === id); })[0]).pipe(operators_1.delay(2000));
+        return this.http.get(baseurl_1.baseURL + 'dishes/' + id);
     };
     DishService.prototype.getFeaturedDish = function () {
-        return rxjs_1.of(dishes_1.DISHES.filter(function (dish) { return dish.featured; })[0]).pipe(operators_1.delay(2000));
+        return this.http.get(baseurl_1.baseURL + 'dishes?featured=true')
+            .pipe(operators_1.map(function (dishes) { return dishes[0]; }));
     };
     DishService.prototype.getDishIds = function () {
-        return rxjs_1.of(dishes_1.DISHES.map(function (dish) { return dish.id; }));
+        return this.getDishes()
+            .pipe(operators_1.map(function (dishes) { return dishes.map(function (dish) { return dish.id; }); }));
     };
     DishService = __decorate([
         core_1.Injectable({

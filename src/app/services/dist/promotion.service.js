@@ -7,21 +7,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 exports.__esModule = true;
 exports.PromotionService = void 0;
+var baseurl_1 = require("./../shared/baseurl");
 var core_1 = require("@angular/core");
-var promotions_1 = require("../shared/promotions");
-var rxjs_1 = require("rxjs");
 var operators_1 = require("rxjs/operators");
 var PromotionService = /** @class */ (function () {
-    function PromotionService() {
+    function PromotionService(http) {
+        this.http = http;
     }
     PromotionService.prototype.getPromotions = function () {
-        return rxjs_1.of(promotions_1.PROMOTIONS).pipe(operators_1.delay(2000));
+        return this.http.get(baseurl_1.baseURL + 'promotions');
     };
     PromotionService.prototype.getPromotion = function (id) {
-        return rxjs_1.of(promotions_1.PROMOTIONS.filter(function (promo) { return (promo.id === id); })[0]).pipe(operators_1.delay(2000));
+        return this.http.get(baseurl_1.baseURL + 'promotions/' + id);
     };
     PromotionService.prototype.getFeaturedPromotion = function () {
-        return rxjs_1.of(promotions_1.PROMOTIONS.filter(function (promotion) { return promotion.featured; })[0]).pipe(operators_1.delay(2000));
+        return this.http.get(baseurl_1.baseURL + 'promotions?featured=true')
+            .pipe(operators_1.map(function (promotion) { return promotion[0]; }));
     };
     PromotionService = __decorate([
         core_1.Injectable({

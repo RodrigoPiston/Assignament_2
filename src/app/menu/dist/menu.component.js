@@ -5,26 +5,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 exports.__esModule = true;
 exports.MenuComponent = void 0;
 var core_1 = require("@angular/core");
 var MenuComponent = /** @class */ (function () {
-    function MenuComponent(dishService) {
+    function MenuComponent(dishService, BaseURL) {
         this.dishService = dishService;
+        this.BaseURL = BaseURL;
     }
     MenuComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.dishService.getDishes().subscribe(function (dishes) { return _this.dishes = dishes; });
-    };
-    MenuComponent.prototype.onSelect = function (dish) {
-        this.selectedDish = dish;
     };
     MenuComponent = __decorate([
         core_1.Component({
             selector: 'app-menu',
             templateUrl: './menu.component.html',
             styleUrls: ['./menu.component.scss']
-        })
+        }),
+        __param(1, core_1.Inject('BaseURL'))
     ], MenuComponent);
     return MenuComponent;
 }());

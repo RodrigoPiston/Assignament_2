@@ -8,21 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.LeaderService = void 0;
 var core_1 = require("@angular/core");
-var leaders_1 = require("../shared/leaders");
-var rxjs_1 = require("rxjs");
+var baseurl_1 = require("./../shared/baseurl");
 var operators_1 = require("rxjs/operators");
 var LeaderService = /** @class */ (function () {
-    function LeaderService() {
+    function LeaderService(http) {
+        this.http = http;
     }
     LeaderService.prototype.getLeaders = function () {
-        //return Promise.resolve(LEADERS);
-        return rxjs_1.of(leaders_1.LEADERS).pipe(operators_1.delay(2000));
+        return this.http.get(baseurl_1.baseURL + 'leadership');
     };
     LeaderService.prototype.getLeader = function (id) {
-        return rxjs_1.of(leaders_1.LEADERS.filter(function (leader) { return (leader.id === id); })[0]).pipe(operators_1.delay(2000));
+        return this.http.get(baseurl_1.baseURL + 'leadership/' + id);
     };
     LeaderService.prototype.getFeaturedLeader = function () {
-        return rxjs_1.of(leaders_1.LEADERS.filter(function (leader) { return leader.featured; })[0]).pipe(operators_1.delay(2000));
+        return this.http.get(baseurl_1.baseURL + 'leadership?featured=true')
+            .pipe(operators_1.map(function (leader) { return leader[0]; }));
     };
     LeaderService = __decorate([
         core_1.Injectable({

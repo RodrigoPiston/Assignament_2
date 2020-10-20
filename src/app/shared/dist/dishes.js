@@ -1,6 +1,7 @@
-import { Dish } from './dish';
-
-export const DISHES: Dish[] = [
+"use strict";
+exports.__esModule = true;
+exports.DISHES = void 0;
+exports.DISHES = [
     {
         id: '0',
         name: 'Uthappizza',

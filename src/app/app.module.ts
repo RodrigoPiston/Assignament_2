@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSliderModule } from '@angular/material/slider';
+import { HttpClientModule } from '@angular/common/http';
 
 // -- Services
 import { DishService } from './services/dish.service';
@@ -34,10 +35,11 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { LoginComponent } from './login/login.component';
 
 // -- Independent Imports
 import 'hammerjs';
-import { LoginComponent } from './login/login.component';
+import { baseURL } from './shared/baseurl';
 
 @NgModule({
   // -- All the components
@@ -72,14 +74,20 @@ import { LoginComponent } from './login/login.component';
     MatSelectModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
-    MatSliderModule
+    MatSliderModule,
+    HttpClientModule
   ],
   // -- For show the modals dialog
   entryComponents: [
     LoginComponent
   ],
   // -- All the Services
-  providers: [ DishService,PromotionService,LeaderService],
+  providers: [ 
+    DishService,
+    PromotionService,
+    LeaderService,
+    { provide: 'BaseURL',useValue: baseURL}],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

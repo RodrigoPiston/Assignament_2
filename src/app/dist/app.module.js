@@ -28,6 +28,7 @@ var select_1 = require("@angular/material/select");
 var slide_toggle_1 = require("@angular/material/slide-toggle");
 var progress_spinner_1 = require("@angular/material/progress-spinner");
 var slider_1 = require("@angular/material/slider");
+var http_1 = require("@angular/common/http");
 // -- Services
 var dish_service_1 = require("./services/dish.service");
 var promotion_service_1 = require("./services/promotion.service");
@@ -41,9 +42,10 @@ var footer_component_1 = require("./footer/footer.component");
 var home_component_1 = require("./home/home.component");
 var about_component_1 = require("./about/about.component");
 var contact_component_1 = require("./contact/contact.component");
+var login_component_1 = require("./login/login.component");
 // -- Independent Imports
 require("hammerjs");
-var login_component_1 = require("./login/login.component");
+var baseurl_1 = require("./shared/baseurl");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -81,14 +83,20 @@ var AppModule = /** @class */ (function () {
                 select_1.MatSelectModule,
                 slide_toggle_1.MatSlideToggleModule,
                 progress_spinner_1.MatProgressSpinnerModule,
-                slider_1.MatSliderModule
+                slider_1.MatSliderModule,
+                http_1.HttpClientModule
             ],
             // -- For show the modals dialog
             entryComponents: [
                 login_component_1.LoginComponent
             ],
             // -- All the Services
-            providers: [dish_service_1.DishService, promotion_service_1.PromotionService, leader_service_1.LeaderService],
+            providers: [
+                dish_service_1.DishService,
+                promotion_service_1.PromotionService,
+                leader_service_1.LeaderService,
+                { provide: 'BaseURL', useValue: baseurl_1.baseURL }
+            ],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
