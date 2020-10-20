@@ -35,6 +35,7 @@ export class DishdetailComponent implements OnInit {
     actualComment : Comment;
 
     dish: Dish;
+    dishcopy: Dish;
     dishIds: string[];
     prev: string;
     next: string;
@@ -52,7 +53,7 @@ export class DishdetailComponent implements OnInit {
         
       this.route.params.pipe(switchMap((params:Params) => this.dishservice.getDish(params['id'])))
         .subscribe(
-          dish => {this.dish = dish; this.setPrevNext(dish.id);},
+          dish => {this.dish = dish; this.setPrevNext(dish.id); this.dishcopy = dish},
           errMess => this.errMess = <any>errMess
           );
     }
@@ -111,7 +112,13 @@ export class DishdetailComponent implements OnInit {
       this.actualComment.date = Date.now().toString();
       // -- Push the new comment in comments array
       this.dish.comments.push(this.actualComment)
-
+      this.dishservice.putDish(this.dishcopy)
+        .subscribe(
+          dish =>{
+            this.dish = dish; this.dishcopy = dish;
+          },
+          errmess => { this.dish = null; this.dishcopy = null, this.errMess = <any>errmess;}
+        )
       this.commentForm.reset({
         author: '',
         comment: '',

@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.DishService = void 0;
 var core_1 = require("@angular/core");
+var http_1 = require("@angular/common/http");
 var baseurl_1 = require("./../shared/baseurl");
 var operators_1 = require("rxjs/operators");
 var DishService = /** @class */ (function () {
@@ -34,6 +35,15 @@ var DishService = /** @class */ (function () {
         return this.getDishes()
             .pipe(operators_1.map(function (dishes) { return dishes.map(function (dish) { return dish.id; }); }))
             .pipe(operators_1.catchError(function (error) { return error; }));
+    };
+    DishService.prototype.putDish = function (dish) {
+        var httpOptions = {
+            headers: new http_1.HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        };
+        return this.http.put(baseurl_1.baseURL + 'dishes/' + dish.id, dish, httpOptions)
+            .pipe(operators_1.catchError(this.processHTTPMsgService.handleError));
     };
     DishService = __decorate([
         core_1.Injectable({
