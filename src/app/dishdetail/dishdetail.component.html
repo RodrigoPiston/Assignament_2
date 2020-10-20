@@ -33,9 +33,9 @@
         <div mat-line><span>--{{commentDish.author}} </span><span>{{commentDish.date | date}}</span></div>
       </mat-list-item>
       <mat-list-item *ngIf="commentForm.valid">
-        <div mat-line>{{actualComment.comment}}</div>
-        <div mat-line> {{actualComment.rating}} Starts</div>
-        <div mat-line><span>--{{actualComment.author}}</span></div>
+        <div mat-line>{{comment.comment}}</div>
+        <div mat-line> {{comment.rating}} Starts</div>
+        <div mat-line><span>--{{comment.author}}</span></div>
       </mat-list-item>
     </mat-list>
   </div>

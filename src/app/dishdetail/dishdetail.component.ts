@@ -32,7 +32,7 @@ export class DishdetailComponent implements OnInit {
     };
 
     commentForm: FormGroup;
-    actualComment : Comment;
+    comment : Comment;
 
     dish: Dish;
     dishcopy: Dish;
@@ -93,7 +93,7 @@ export class DishdetailComponent implements OnInit {
       }
       // -- Update the comments selections adding a new comment
       if(this.commentForm.valid){
-        this.actualComment = this.commentForm.value;
+        this.comment = this.commentForm.value;
       }
     }
 
@@ -109,9 +109,9 @@ export class DishdetailComponent implements OnInit {
 
     onSubmit(){
       // -- Formatting date for the comment
-      this.actualComment.date = Date.now().toString();
+      this.comment.date = Date.now().toString();
       // -- Push the new comment in comments array
-      this.dish.comments.push(this.actualComment)
+      this.dish.comments.push(this.comment)
       this.dishservice.putDish(this.dishcopy)
         .subscribe(
           dish =>{

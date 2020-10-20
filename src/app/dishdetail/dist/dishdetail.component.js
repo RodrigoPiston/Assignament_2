@@ -75,7 +75,7 @@ var DishdetailComponent = /** @class */ (function () {
         }
         // -- Update the comments selections adding a new comment
         if (this.commentForm.valid) {
-            this.actualComment = this.commentForm.value;
+            this.comment = this.commentForm.value;
         }
     };
     DishdetailComponent.prototype.setPrevNext = function (dishId) {
@@ -89,9 +89,9 @@ var DishdetailComponent = /** @class */ (function () {
     DishdetailComponent.prototype.onSubmit = function () {
         var _this = this;
         // -- Formatting date for the comment
-        this.actualComment.date = Date.now().toString();
+        this.comment.date = Date.now().toString();
         // -- Push the new comment in comments array
-        this.dish.comments.push(this.actualComment);
+        this.dish.comments.push(this.comment);
         this.dishservice.putDish(this.dishcopy)
             .subscribe(function (dish) {
             _this.dish = dish;
