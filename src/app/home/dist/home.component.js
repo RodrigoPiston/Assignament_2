@@ -20,9 +20,9 @@ var HomeComponent = /** @class */ (function () {
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.dishService.getFeaturedDish().subscribe(function (featuredDish) { return _this.dish = featuredDish; });
-        this.leaderService.getFeaturedLeader().subscribe(function (featuredLeader) { _this.leader = featuredLeader; });
-        this.promotionService.getFeaturedPromotion().subscribe(function (featuredPromotion) { return _this.promotion = featuredPromotion; });
+        this.dishService.getFeaturedDish().subscribe(function (featuredDish) { return _this.dish = featuredDish; }, function (errMess) { return _this.dishErrMess = errMess; });
+        this.leaderService.getFeaturedLeader().subscribe(function (featuredLeader) { _this.leader = featuredLeader; }, function (errMess) { return _this.leaderErrMess = errMess; });
+        this.promotionService.getFeaturedPromotion().subscribe(function (featuredPromotion) { return _this.promotion = featuredPromotion; }, function (errMess) { return _this.promotionErrMess = errMess; });
     };
     HomeComponent = __decorate([
         core_1.Component({

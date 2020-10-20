@@ -11,18 +11,22 @@ var core_1 = require("@angular/core");
 var baseurl_1 = require("./../shared/baseurl");
 var operators_1 = require("rxjs/operators");
 var LeaderService = /** @class */ (function () {
-    function LeaderService(http) {
+    function LeaderService(http, processHTTPMsgService) {
         this.http = http;
+        this.processHTTPMsgService = processHTTPMsgService;
     }
     LeaderService.prototype.getLeaders = function () {
-        return this.http.get(baseurl_1.baseURL + 'leadership');
+        return this.http.get(baseurl_1.baseURL + 'leadership')
+            .pipe(operators_1.catchError(this.processHTTPMsgService.handleError));
     };
     LeaderService.prototype.getLeader = function (id) {
-        return this.http.get(baseurl_1.baseURL + 'leadership/' + id);
+        return this.http.get(baseurl_1.baseURL + 'leadership/' + id)
+            .pipe(operators_1.catchError(this.processHTTPMsgService.handleError));
     };
     LeaderService.prototype.getFeaturedLeader = function () {
         return this.http.get(baseurl_1.baseURL + 'leadership?featured=true')
-            .pipe(operators_1.map(function (leader) { return leader[0]; }));
+            .pipe(operators_1.map(function (leader) { return leader[0]; }))
+            .pipe(operators_1.catchError(this.processHTTPMsgService.handleError));
     };
     LeaderService = __decorate([
         core_1.Injectable({

@@ -40,7 +40,7 @@ var DishdetailComponent = /** @class */ (function () {
         this.dishservice.getDishIds()
             .subscribe(function (dishIds) { return _this.dishIds = dishIds; });
         this.route.params.pipe(operators_1.switchMap(function (params) { return _this.dishservice.getDish(params['id']); }))
-            .subscribe(function (dish) { _this.dish = dish; _this.setPrevNext(dish.id); });
+            .subscribe(function (dish) { _this.dish = dish; _this.setPrevNext(dish.id); }, function (errMess) { return _this.errMess = errMess; });
     };
     DishdetailComponent.prototype.createForm = function () {
         var _this = this;

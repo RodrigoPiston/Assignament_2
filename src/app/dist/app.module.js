@@ -33,6 +33,7 @@ var http_1 = require("@angular/common/http");
 var dish_service_1 = require("./services/dish.service");
 var promotion_service_1 = require("./services/promotion.service");
 var leader_service_1 = require("./services/leader.service");
+var process_httpmsg_service_1 = require("./services/process-httpmsg.service");
 // -- Components
 var app_component_1 = require("./app.component");
 var menu_component_1 = require("./menu/menu.component");
@@ -95,6 +96,7 @@ var AppModule = /** @class */ (function () {
                 dish_service_1.DishService,
                 promotion_service_1.PromotionService,
                 leader_service_1.LeaderService,
+                process_httpmsg_service_1.ProcessHTTPMsgService,
                 { provide: 'BaseURL', useValue: baseurl_1.baseURL }
             ],
             bootstrap: [app_component_1.AppComponent]

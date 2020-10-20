@@ -11,18 +11,22 @@ var baseurl_1 = require("./../shared/baseurl");
 var core_1 = require("@angular/core");
 var operators_1 = require("rxjs/operators");
 var PromotionService = /** @class */ (function () {
-    function PromotionService(http) {
+    function PromotionService(http, processHTTPMsgService) {
         this.http = http;
+        this.processHTTPMsgService = processHTTPMsgService;
     }
     PromotionService.prototype.getPromotions = function () {
-        return this.http.get(baseurl_1.baseURL + 'promotions');
+        return this.http.get(baseurl_1.baseURL + 'promotions')
+            .pipe(operators_1.catchError(this.processHTTPMsgService.handleError));
     };
     PromotionService.prototype.getPromotion = function (id) {
-        return this.http.get(baseurl_1.baseURL + 'promotions/' + id);
+        return this.http.get(baseurl_1.baseURL + 'promotions/' + id)
+            .pipe(operators_1.catchError(this.processHTTPMsgService.handleError));
     };
     PromotionService.prototype.getFeaturedPromotion = function () {
         return this.http.get(baseurl_1.baseURL + 'promotions?featured=true')
-            .pipe(operators_1.map(function (promotion) { return promotion[0]; }));
+            .pipe(operators_1.map(function (promotion) { return promotion[0]; }))
+            .pipe(operators_1.catchError(this.processHTTPMsgService.handleError));
     };
     PromotionService = __decorate([
         core_1.Injectable({

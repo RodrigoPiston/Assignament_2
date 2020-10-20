@@ -11,24 +11,29 @@ var core_1 = require("@angular/core");
 var baseurl_1 = require("./../shared/baseurl");
 var operators_1 = require("rxjs/operators");
 var DishService = /** @class */ (function () {
-    function DishService(http) {
+    function DishService(http, processHTTPMsgService) {
         this.http = http;
+        this.processHTTPMsgService = processHTTPMsgService;
     }
     // -- Simulate time delay
     DishService.prototype.getDishes = function () {
         console.log(baseurl_1.baseURL + 'dishes');
-        return this.http.get(baseurl_1.baseURL + 'dishes');
+        return this.http.get(baseurl_1.baseURL + 'dishes')
+            .pipe(operators_1.catchError(this.processHTTPMsgService.handleError));
     };
     DishService.prototype.getDish = function (id) {
-        return this.http.get(baseurl_1.baseURL + 'dishes/' + id);
+        return this.http.get(baseurl_1.baseURL + 'dishes/' + id)
+            .pipe(operators_1.catchError(this.processHTTPMsgService.handleError));
     };
     DishService.prototype.getFeaturedDish = function () {
         return this.http.get(baseurl_1.baseURL + 'dishes?featured=true')
-            .pipe(operators_1.map(function (dishes) { return dishes[0]; }));
+            .pipe(operators_1.map(function (dishes) { return dishes[0]; }))
+            .pipe(operators_1.catchError(this.processHTTPMsgService.handleError));
     };
     DishService.prototype.getDishIds = function () {
         return this.getDishes()
-            .pipe(operators_1.map(function (dishes) { return dishes.map(function (dish) { return dish.id; }); }));
+            .pipe(operators_1.map(function (dishes) { return dishes.map(function (dish) { return dish.id; }); }))
+            .pipe(operators_1.catchError(function (error) { return error; }));
     };
     DishService = __decorate([
         core_1.Injectable({
