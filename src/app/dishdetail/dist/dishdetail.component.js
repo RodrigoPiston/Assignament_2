@@ -13,6 +13,7 @@ exports.DishdetailComponent = void 0;
 var core_1 = require("@angular/core");
 var operators_1 = require("rxjs/operators");
 var forms_1 = require("@angular/forms");
+var animations_1 = require("@angular/animations");
 var DishdetailComponent = /** @class */ (function () {
     function DishdetailComponent(dishservice, route, location, fb, BaseURL) {
         this.dishservice = dishservice;
@@ -20,6 +21,7 @@ var DishdetailComponent = /** @class */ (function () {
         this.location = location;
         this.fb = fb;
         this.BaseURL = BaseURL;
+        this.visibility = 'shown';
         this.formErrors = {
             'author': '',
             'comment': ''
@@ -39,8 +41,8 @@ var DishdetailComponent = /** @class */ (function () {
         var _this = this;
         this.dishservice.getDishIds()
             .subscribe(function (dishIds) { return _this.dishIds = dishIds; });
-        this.route.params.pipe(operators_1.switchMap(function (params) { return _this.dishservice.getDish(params['id']); }))
-            .subscribe(function (dish) { _this.dish = dish; _this.setPrevNext(dish.id); _this.dishcopy = dish; }, function (errMess) { return _this.errMess = errMess; });
+        this.route.params.pipe(operators_1.switchMap(function (params) { _this.visibility = 'hidden'; return _this.dishservice.getDish(params['id']); }))
+            .subscribe(function (dish) { _this.dish = dish; _this.dishcopy = dish; _this.setPrevNext(dish.id); _this.visibility = 'shown'; }, function (errMess) { return _this.errMess = errMess; });
     };
     DishdetailComponent.prototype.createForm = function () {
         var _this = this;
@@ -114,7 +116,14 @@ var DishdetailComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-dishdetail',
             templateUrl: './dishdetail.component.html',
-            styleUrls: ['./dishdetail.component.scss']
+            styleUrls: ['./dishdetail.component.scss'],
+            animations: [
+                animations_1.trigger('visibility', [
+                    animations_1.state('shown', animations_1.style({ transform: 'scale(1.0)', opacity: 1 })),
+                    animations_1.state('hidden', animations_1.style({ transform: 'scale(0.5)', opacity: 0 })),
+                    animations_1.transition('* => *', animations_1.animate('0.5s ease-in-out'))
+                ])
+            ]
         }),
         __param(4, core_1.Inject('BaseURL'))
     ], DishdetailComponent);

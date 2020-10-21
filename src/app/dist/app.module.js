@@ -47,6 +47,7 @@ var login_component_1 = require("./login/login.component");
 // -- Independent Imports
 require("hammerjs");
 var baseurl_1 = require("./shared/baseurl");
+var highlight_directive_1 = require("./directives/highlight.directive");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -62,7 +63,8 @@ var AppModule = /** @class */ (function () {
                 home_component_1.HomeComponent,
                 about_component_1.AboutComponent,
                 contact_component_1.ContactComponent,
-                login_component_1.LoginComponent
+                login_component_1.LoginComponent,
+                highlight_directive_1.HighlightDirective
             ],
             // -- All the modules(libraries)
             imports: [
