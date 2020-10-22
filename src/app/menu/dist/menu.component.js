@@ -11,6 +11,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 exports.__esModule = true;
 exports.MenuComponent = void 0;
 var core_1 = require("@angular/core");
+var app_animations_1 = require("../animations/app.animations");
 var MenuComponent = /** @class */ (function () {
     function MenuComponent(dishService, BaseURL) {
         this.dishService = dishService;
@@ -24,7 +25,15 @@ var MenuComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-menu',
             templateUrl: './menu.component.html',
-            styleUrls: ['./menu.component.scss']
+            styleUrls: ['./menu.component.scss'],
+            host: {
+                '[@flyInOut]': 'true',
+                'style': 'display:block;'
+            },
+            animations: [
+                app_animations_1.flyInOut(),
+                app_animations_1.expand()
+            ]
         }),
         __param(1, core_1.Inject('BaseURL'))
     ], MenuComponent);

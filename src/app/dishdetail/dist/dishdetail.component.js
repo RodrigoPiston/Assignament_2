@@ -13,7 +13,7 @@ exports.DishdetailComponent = void 0;
 var core_1 = require("@angular/core");
 var operators_1 = require("rxjs/operators");
 var forms_1 = require("@angular/forms");
-var animations_1 = require("@angular/animations");
+var app_animations_1 = require("../animations/app.animations");
 var DishdetailComponent = /** @class */ (function () {
     function DishdetailComponent(dishservice, route, location, fb, BaseURL) {
         this.dishservice = dishservice;
@@ -117,12 +117,14 @@ var DishdetailComponent = /** @class */ (function () {
             selector: 'app-dishdetail',
             templateUrl: './dishdetail.component.html',
             styleUrls: ['./dishdetail.component.scss'],
+            host: {
+                '[@flyInOut]': 'true',
+                'style': 'display:block;'
+            },
             animations: [
-                animations_1.trigger('visibility', [
-                    animations_1.state('shown', animations_1.style({ transform: 'scale(1.0)', opacity: 1 })),
-                    animations_1.state('hidden', animations_1.style({ transform: 'scale(0.5)', opacity: 0 })),
-                    animations_1.transition('* => *', animations_1.animate('0.5s ease-in-out'))
-                ])
+                app_animations_1.flyInOut(),
+                app_animations_1.visibility(),
+                app_animations_1.expand()
             ]
         }),
         __param(4, core_1.Inject('BaseURL'))

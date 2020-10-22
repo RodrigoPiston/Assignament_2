@@ -10,6 +10,7 @@ exports.ContactComponent = void 0;
 var forms_1 = require("@angular/forms");
 var feedback_1 = require("../shared/feedback");
 var core_1 = require("@angular/core");
+var app_animations_1 = require("../animations/app.animations");
 var ContactComponent = /** @class */ (function () {
     function ContactComponent(fb) {
         this.fb = fb;
@@ -101,7 +102,14 @@ var ContactComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-contact',
             templateUrl: './contact.component.html',
-            styleUrls: ['./contact.component.scss']
+            styleUrls: ['./contact.component.scss'],
+            host: {
+                '[@flyInOut]': 'true',
+                'style': 'display:block;'
+            },
+            animations: [
+                app_animations_1.flyInOut()
+            ]
         })
     ], ContactComponent);
     return ContactComponent;
