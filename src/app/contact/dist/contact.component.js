@@ -12,8 +12,9 @@ var feedback_1 = require("../shared/feedback");
 var core_1 = require("@angular/core");
 var app_animations_1 = require("../animations/app.animations");
 var ContactComponent = /** @class */ (function () {
-    function ContactComponent(fb) {
+    function ContactComponent(fb, feedbackservice) {
         this.fb = fb;
+        this.feedbackservice = feedbackservice;
         this.formErrors = {
             'firstname': '',
             'lastname': '',
@@ -40,10 +41,13 @@ var ContactComponent = /** @class */ (function () {
                 'email': 'Email not in valid format.'
             }
         };
+        this.visibility = 'shown';
+        this.waiting = false;
         this.contactType = feedback_1.ContactType;
         this.createForm();
     }
     ContactComponent.prototype.ngOnInit = function () {
+        this.visibility = 'hidden';
     };
     ContactComponent.prototype.createForm = function () {
         var _this = this;
@@ -51,7 +55,7 @@ var ContactComponent = /** @class */ (function () {
             firstname: ['', [forms_1.Validators.required, forms_1.Validators.minLength(2), forms_1.Validators.maxLength(25)]],
             lastname: ['', [forms_1.Validators.required, forms_1.Validators.minLength(2), forms_1.Validators.maxLength(25)]],
             telnum: [0, [forms_1.Validators.required, forms_1.Validators.pattern]],
-            email: ['', forms_1.Validators.required, forms_1.Validators.email],
+            email: ['', [forms_1.Validators.required, forms_1.Validators.email]],
             agree: false,
             contacttype: 'None',
             message: ''
@@ -82,8 +86,22 @@ var ContactComponent = /** @class */ (function () {
         }
     };
     ContactComponent.prototype.onSubmit = function () {
+        var _this = this;
+        this.waiting = true;
+        this.visibility = 'hidden';
         this.feedback = this.feedbackForm.value;
-        console.log(this.feedback);
+        this.feedbackservice.postFeedback(this.feedback)
+            .subscribe(function (feedback) {
+            _this.feedback = feedback;
+            _this.waiting = false;
+            _this.visibility = 'shown';
+            console.log("Timeout In");
+            setTimeout(function () {
+                _this.visibility = 'hidden';
+                _this.feedback = null;
+            }, 5000);
+            console.log("Timeout Out");
+        }, function (errmess) { _this.feedback = null; _this.errMess = errmess; });
         this.feedbackForm.reset({
             firstname: '',
             lastname: '',
@@ -108,7 +126,9 @@ var ContactComponent = /** @class */ (function () {
                 'style': 'display:block;'
             },
             animations: [
-                app_animations_1.flyInOut()
+                app_animations_1.flyInOut(),
+                app_animations_1.visibility(),
+                app_animations_1.expand()
             ]
         })
     ], ContactComponent);
